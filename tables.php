@@ -1,7 +1,7 @@
 <?php
-$USERS = "CREATE TABLE IF NOT EXISTS USERS (
+$USERS = "CREATE TABLE IF NOT EXISTS Users (
     ID int(11) AUTO_INCREMENT,
-    USERNAME varchar(16) NOT NULL,
-    PASSWORD varchar(300) NOT NULL,
+    username varchar(16) NOT NULL,
+    password varchar(300) NOT NULL,
     PRIMARY KEY (ID)
     )";

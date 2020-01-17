@@ -49,7 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    // Create account 
+    $sql = "INSERT INTO Users (username, password) VALUES (?, ?)";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([$username, $password]);
+
     echo jsonRes(201, "Good to go.");
+
     exit();
 }
 
