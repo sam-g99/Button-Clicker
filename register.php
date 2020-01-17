@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password2 = trim($_POST['password2']);
 
 
-
+    // Username check
     if (empty($username)) {
         echo "Please enter a username";
         exit();
@@ -18,7 +18,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    echo "Cool beans " . isset($username);
+    // Password check
+    if (empty($password)) {
+        echo "Please enter a password.";
+        exit();
+    }
+
+    if (strlen($password) < 8) {
+        echo "Password needs to at least be 8 characters.";
+        exit();
+    }
+
+    // Confirm Password2 check
+
+    if (empty($password2)) {
+        echo "Please confirm your password.";
+        exit();
+    }
+
+    if ($password2 !== $password) {
+        echo "The passwords do not match.";
+        exit();
+    }
+
+    echo "Cool beans " . $username . $password . $password2;
     exit();
 }
 
@@ -40,11 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Register</h1>
     <form action="/register.php" method="post">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username">
+        <input type="text" name="username" id="username" maxlength="16">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" minlength="8">
         <label for="password2">Confirm Password</label>
-        <input type="password" name="password2" id="password2">
+        <input type="password" name="password2" id="password2" minlength="8">
         <button type="submit">Submit</button>
     </form>
 </body>
