@@ -18,6 +18,8 @@
         <input type="text" name="username" id="username">
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
+        <label for="password2">Confirm Password</label>
+        <input type="password2" name="password2" id="password2">
     </form>
 </body>
 
