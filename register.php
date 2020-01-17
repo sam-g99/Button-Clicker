@@ -12,6 +12,14 @@
     <?php
     require 'NavBar.php';
     require 'config.php';
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirmPw = $_POST['confirmPw'];
+
+    if (isset($username) && isset($password) && isset($confirmPw)) {
+        echo 'halleluja';
+    }
+
     ?>
     <h1>Register</h1>
     <form action="" method="post">
@@ -19,6 +27,8 @@
         <input type="text" name="username" id="username">
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
+        <label for="password2">Confirm Password</label>
+        <input type="password2" name="password2" id="password2">
     </form>
 </body>
 
