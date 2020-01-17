@@ -17,7 +17,7 @@
     $password2 = $_POST['password2'];
 
     if (isset($username) && isset($password) && isset($confirmPw)) {
-        echo 'halleluja';
+        echo 'hallelujah';
     }
 
     ?>
