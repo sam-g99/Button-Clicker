@@ -1,3 +1,28 @@
+<?php
+require 'config.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+    $password2 = trim($_POST['password2']);
+
+
+
+    if (empty($username)) {
+        echo "Please enter a username";
+        exit();
+    }
+
+    if (strlen($username) > 16) {
+        echo "Username is needs to be under 16 characters.";
+        exit();
+    }
+
+    echo "Cool beans " . isset($username);
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,16 +36,6 @@
 <body>
     <?php
     require 'NavBar.php';
-    require 'config.php';
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $password2 = $_POST['password2'];
-
-    if (isset($username) && isset($password) && isset($password2)) {
-        echo 'hallelujah';
-        exit();
-    }
-
     ?>
     <h1>Register</h1>
     <form action="/register.php" method="post">
