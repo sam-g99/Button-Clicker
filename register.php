@@ -49,12 +49,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    //Hash the password 
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
     // Create account 
     $sql = "INSERT INTO Users (username, password) VALUES (?, ?)";
 
     $stmt = $pdo->prepare($sql);
 
-    $stmt->execute([$username, $password]);
+    $stmt->execute([$username, $hashedPassword]);
 
     echo jsonRes(201, "Good to go.");
 
