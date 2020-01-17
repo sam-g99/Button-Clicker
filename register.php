@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     {
         return json_encode(array(
             'status' => $status,
-            'message' => $msg
+            'msg' => $msg
         ));
     }
 
@@ -58,9 +58,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt = $pdo->prepare($sql);
 
+
+
+
     $stmt->execute([$username, $hashedPassword]);
 
-    echo jsonRes(201, "Good to go.");
+    // Probably should reconsider...
+    if ($stmt->errorInfo()[1]) {
+        if ($stmt->errorInfo()[1] == "1062") {
+            echo jsonRes(409, "Username already exist");
+            exit();
+        }
+        echo jsonRes(409, "Unknown Error");
+        exit();
+    }
+
+    echo jsonRes(201, "User created.");
 
     exit();
 }
@@ -83,12 +96,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Register</h1>
     <form onsubmit="event.preventDefault(); register();" method="post">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" maxlength="16">
+        <input type="text" name="username" id="username" maxlength="16" required>
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" minlength="8">
+        <input type="password" name="password" id="password" minlength="8" required>
         <label for="password2">Confirm Password</label>
-        <input type="password" name="password2" id="password2" minlength="8">
+        <input type="password" name="password2" id="password2" minlength="8" required>
         <button type="submit">Submit</button>
+        <div id="errorMessage"></div>
     </form>
 
     <script>
@@ -100,8 +114,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 body: formData,
             })
 
-
-            console.log(await response.json());
+            const data = await response.json();
+            if (data.status == 201) {
+                alert('Your account has been created');
+            } else {
+                document.getElementById('errorMessage').innerText = data.msg;
+            }
         }
     </script>
 </body>
