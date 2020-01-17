@@ -16,19 +16,21 @@
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
 
-    if (isset($username) && isset($password) && isset($confirmPw)) {
+    if (isset($username) && isset($password) && isset($password2)) {
         echo 'hallelujah';
+        exit();
     }
 
     ?>
     <h1>Register</h1>
-    <form action="" method="post">
+    <form action="/register.php" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" id="username">
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
         <label for="password2">Confirm Password</label>
-        <input type="password2" name="password2" id="password2">
+        <input type="password" name="password2" id="password2">
+        <button type="submit">Submit</button>
     </form>
 </body>
 
