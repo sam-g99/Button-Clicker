@@ -10,7 +10,8 @@
 
 <body>
     <?php
-    require_once 'NavBar.php'
+    require 'NavBar.php';
+    require 'config.php';
     ?>
     <h1>Register</h1>
     <form action="" method="post">

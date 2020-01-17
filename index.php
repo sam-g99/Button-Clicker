@@ -10,6 +10,7 @@
 
 <body>
     <?php
+    require 'config.php';
     $message = htmlentities($_GET["message"]);
     echo "<h1>$message</h1>";
     ?>
