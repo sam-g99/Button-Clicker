@@ -6,26 +6,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
     $password2 = trim($_POST['password2']);
 
+    function jsonRes($status, $msg)
+    {
+        return json_encode(array(
+            'status' => $status,
+            'message' => $msg
+        ));
+    }
 
     // Username check
     if (empty($username)) {
-        echo "Please enter a username";
+        echo jsonRes(400, "Please enter a username");
         exit();
     }
 
     if (strlen($username) > 16) {
-        echo "Username is needs to be under 16 characters.";
+        echo jsonRes(400, "Username is needs to be under 16 characters.");
         exit();
     }
 
     // Password check
     if (empty($password)) {
-        echo "Please enter a password.";
+        echo jsonRes(400, "Please enter a password.");
         exit();
     }
 
     if (strlen($password) < 8) {
-        echo "Password needs to at least be 8 characters.";
+        echo jsonRes(400, "Password needs to at least be 8 characters.");
         exit();
     }
 
@@ -33,15 +40,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($password2)) {
         echo "Please confirm your password.";
+
         exit();
     }
 
     if ($password2 !== $password) {
-        echo "The passwords do not match.";
+        echo jsonRes(400, "Passwords do not match.");
         exit();
     }
 
-    echo "Cool beans " . $username . $password . $password2;
+    echo jsonRes(201, "Good to go.");
     exit();
 }
 
@@ -61,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require 'NavBar.php';
     ?>
     <h1>Register</h1>
-    <form action="/register.php" method="post">
+    <form onsubmit="event.preventDefault(); register();" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" maxlength="16">
         <label for="password">Password</label>
@@ -70,6 +78,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="password" name="password2" id="password2" minlength="8">
         <button type="submit">Submit</button>
     </form>
+
+    <script>
+        const register = async () => {
+            const formData = new FormData(document.querySelector('form'));
+
+            const response = await fetch('/register.php', {
+                method: 'POST',
+                body: formData,
+            })
+
+
+            console.log(await response.json());
+        }
+    </script>
 </body>
 
 </html>
