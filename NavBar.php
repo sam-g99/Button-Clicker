@@ -4,7 +4,7 @@ session_start();
 $username = htmlentities($_SESSION['username']);
 
 if (isset($_SESSION['username'])) {
-    echo "<nav class='logged-in'><p class='greeting'>Hello $username</p>
+    echo "<nav class='logged-in-nav'><p class='greeting'>Hello $username</p>
     <a href='/logout.php'> Logout </a></nav>";
 } else {
     $nav = '

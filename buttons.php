@@ -14,6 +14,7 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Document</title>
 </head>
 
@@ -22,13 +23,15 @@ if (!isset($_SESSION['username'])) {
     <?php
     require 'NavBar.php'
     ?>
-    <div class="buttons-container">
-        <button id="blueButton">Click Me</button>
-        <button id="greenButton">Click Me</button>
-        <button id="grayButton">Click Me</button>
-    </div>
+    <div class="center">
+        <div class="buttons-container">
+            <button id="blueButton">Click Me</button>
+            <button id="greenButton">Click Me</button>
+            <button id="grayButton">Click Me</button>
+        </div>
 
-    <a href="/stats.php"> View Stats </a>
+        <a href="/stats.php" class="view-stats"> View Stats </a>
+    </div>
 </body>
 
 </html>

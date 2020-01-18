@@ -5,6 +5,12 @@
 	font-family: 'Roboto', sans-serif;
 	box-sizing: border-box;
 }
+:focus {
+	outline: none;
+}
+::-moz-focus-inner {
+	border: 0;
+}
 html {
 	background-color: #fafafa;
 	height: 100%;
@@ -35,7 +41,68 @@ nav a {
 nav a:last-of-type {
 	margin-right: 0;
 }
-/* Homepage */
+
+.logged-in-nav {
+	display: flex;
+	width: 100%;
+	padding: 20px;
+	position: absolute;
+	top: 0;
+}
+
+.logged-in-nav p {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 20px;
+}
+
+.logged-in-nav a {
+	margin-left: auto;
+}
+
+.buttons-container button {
+	width: 250px;
+	height: 70px;
+	padding: 10px;
+	border-radius: 100px;
+	cursor: pointer;
+	border: 2px solid;
+	margin-right: 25px;
+	color: white;
+	font-size: 22px;
+	transition-duration: 0.2s;
+}
+
+.buttons-container button:hover {
+	transform: scale(1.1);
+}
+
+.buttons-container button:active {
+	transform: scale(1);
+}
+
+.buttons-container button:last-of-type {
+	margin-right: 0;
+}
+#blueButton {
+	background-color: #4fa4f2;
+	border-color: #64b3fb;
+}
+
+#greenButton {
+	background-color: #2ed954;
+	border-color: #5cf97f;
+}
+
+#grayButton {
+	background-color: #e5e6e7;
+	border-color: #ffffff;
+}
+
+.view-stats {
+	color: #b8951c;
+	font-size: 18px;
+	margin-top: 25px;
+}
 
 #home h1 {
 	font-family: 'Roboto Mono', monospace;
