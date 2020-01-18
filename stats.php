@@ -36,7 +36,7 @@ function counter($sql, $pdo)
 }
 
 // First Button user clicked
-$sql = "SELECT * FROM Clicks WHERE username = ? order by DATE(created) DESC LIMIT 1";
+$sql = "SELECT * FROM Clicks WHERE username = ? order by ID ASC LIMIT 1";
 
 $stat = getStat($sql, $pdo);
 if (!empty($stat)) {
@@ -96,16 +96,19 @@ if (!empty($stat)) {
     <?php
     require 'NavBar.php'
     ?>
-    <div class="stats-container center">
-        <?php
-        echo "
-            <div> First button clicked: $stats[firstButton] </div>
-            <div> Last button Clicked: $stats[lastButton] </div>
-            <div> Blue button clicks: $stats[blueClicks] </div>
-            <div> Green button clicks: $stats[greenClicks] </div>
-            <div> Gray button clicks: $stats[grayClicks] </div>
+    <div class="center">
+        <div class="stats-container ">
+            <h3>Your Click Stats!</h3>
+            <?php
+            echo "
+            <div> <p>First button clicked</p> $stats[firstButton] </div>
+            <div> <p>Last button Clicked</p> $stats[lastButton] </div>
+            <div> <p>Blue button clicks</p> $stats[blueClicks] </div>
+            <div> <p>Green button clicks</p> $stats[greenClicks] </div>
+            <div> <p>Gray button clicks</p> $stats[grayClicks] </div>
         " ?>
-        <a href="/buttons.php"> Go back to buttons </a>
+            <a href="/buttons.php"> Go back to buttons </a>
+        </div>
     </div>
 
 </body>
