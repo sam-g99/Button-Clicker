@@ -1,5 +1,13 @@
 <?php
+session_start();
+
+if (isset($_SESSION['username'])) {
+    header('Location: /');
+    exit();
+}
+
 require 'config.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
@@ -12,6 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'status' => $status,
             'msg' => $msg
         ));
+    }
+
+    if (isset($_SESSION['username'])) {
+        echo jsonRes(200, "You're already logged in.");
+        exit();
     }
 
     // Username check

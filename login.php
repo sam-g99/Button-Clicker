@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Redirect if already logged in
+if (isset($_SESSION['username'])) {
+    header('Location: /');
+    exit();
+}
+
 require 'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
@@ -10,6 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'status' => $status,
             'msg' => $msg
         ));
+    }
+
+    if (isset($_SESSION['username'])) {
+        echo jsonRes(200, "You're already logged in.");
+        exit();
     }
 
     // Username check
@@ -50,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (password_verify($password, $user->password)) {
+        $_SESSION['username'] = $user->username;
         echo jsonRes(201, "Logged In");
         exit();
     } else {
@@ -79,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
         <button type="submit">Submit</button>
+        <div id="errorMessage"></div>
     </form>
 
     <script>
@@ -91,7 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             })
 
             const data = await response.json();
-            console.log(data);
+
+            if (data.status == 201) {
+                alert('Logged In');
+            } else {
+                document.getElementById('errorMessage').innerText = data.msg;
+            }
         }
     </script>
 </body>
