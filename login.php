@@ -79,23 +79,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Login</title>
 </head>
 
 <body>
-    <?php
-    require_once 'NavBar.php'
-    ?>
-    <h1>Login</h1>
-    <form onsubmit="event.preventDefault(); login();" method="post">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <button type="submit">Submit</button>
-        <div id="errorMessage"></div>
-    </form>
 
+    <div class="center">
+        <h1>Login</h1>
+        <form onsubmit="event.preventDefault(); login();" method="post">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" maxlength="16" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" minlength="8" required>
+            <button type="submit">Submit</button>
+            <div id="errorMessage"></div>
+        </form>
+        <?php
+        require_once 'NavBar.php'
+        ?>
+    </div>
     <script>
         const login = async () => {
             const formData = new FormData(document.querySelector('form'));
@@ -108,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             const data = await response.json();
 
             if (data.status == 201) {
-                alert('Logged In');
+                window.location = "/";
             } else {
                 document.getElementById('errorMessage').innerText = data.msg;
             }

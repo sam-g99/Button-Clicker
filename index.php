@@ -5,18 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Example PHP Site</title>
 </head>
 
 <body>
-    <?php
-    require 'config.php';
-    $message = htmlentities($_GET["message"]);
-    echo "<h1>$message</h1>";
-    ?>
-    <div class="div">
+    <div id="home" class="center">
         <h1>Button Clicker</h1>
-        <p> Three buttons, so many clicks. </p>
+        <p> Click some buttons and track your progress. </p>
         <?php
         require_once 'NavBar.php'
         ?>
