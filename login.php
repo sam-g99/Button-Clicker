@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (strlen($username) > 16) {
-        echo jsonRes(400, "Username is needs to be under 16 characters.");
+        echo jsonRes(400, "Username needs to be under 16 characters.");
         exit();
     }
 
@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Get user data
+
     $sql = "SELECT * FROM Users WHERE username = ?";
 
     $stmt = $pdo->prepare($sql);
@@ -43,11 +44,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $user = $stmt->fetch(PDO::FETCH_OBJ);
 
+    if (empty($user)) {
+        echo jsonRes(401, "Username does not exist.");
+        exit();
+    }
+
     if (password_verify($password, $user->password)) {
-        echo jsonRes(201, "Woot you have ben verified");
+        echo jsonRes(201, "Logged In");
         exit();
     } else {
-        echo jsonRes(201, "Wrong password :(");
+        echo jsonRes(401, "Wrong password.");
         exit();
     }
 }

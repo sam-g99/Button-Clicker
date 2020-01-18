@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (strlen($username) > 16) {
-        echo jsonRes(400, "Username is needs to be under 16 characters.");
+        echo jsonRes(400, "Username needs to be under 16 characters.");
         exit();
     }
 
