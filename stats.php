@@ -67,6 +67,18 @@ $stat = counter($sql, $pdo);
 
 $stats["grayClicks"] =  $stat;
 
+// Last Button user clicked
+$sql = "SELECT * FROM Clicks WHERE username = ? ORDER BY ID DESC LIMIT 1";
+
+$stat = getStat($sql, $pdo);
+
+if (!empty($stat)) {
+    $stats['lastButton'] =  $stat->button;
+} else {
+    $stats['lastButton'] =  'none clicked';
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +99,8 @@ $stats["grayClicks"] =  $stat;
     <div class="stats-container center">
         <?php
         echo "
-            <div> First Button Clicked: $stats[firstButton] </div>
+            <div> First button clicked: $stats[firstButton] </div>
+            <div> Last button Clicked: $stats[lastButton] </div>
             <div> Blue button clicks: $stats[blueClicks] </div>
             <div> Green button clicks: $stats[greenClicks] </div>
             <div> Gray button clicks: $stats[grayClicks] </div>
