@@ -3,7 +3,7 @@ session_start();
 
 // Redirect if already logged in
 if (isset($_SESSION['username'])) {
-    header('Location: /');
+    header('Location: /buttons.php');
     exit();
 }
 
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div id="errorMessage"></div>
         </form>
         <?php
-        require_once 'NavBar.php'
+        require 'NavBar.php'
         ?>
     </div>
     <script>
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             const data = await response.json();
 
             if (data.status == 201) {
-                window.location = "/";
+                window.location = "/buttons.php";
             } else {
                 document.getElementById('errorMessage').innerText = data.msg;
             }
