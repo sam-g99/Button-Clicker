@@ -2,4 +2,7 @@
 
 You have three buttons to click, so click them.
 
-Made to test php :)
+[Live Demo](https://buttonclicker12.herokuapp.com/)
+
+### other stuff <_<
+[Spotify Store Demo Link](https://demostore2283.myshopify.com/)
